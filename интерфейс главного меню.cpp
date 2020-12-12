@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    string Name_1 = "a", Name_2 = "b", Name_3 = "c", Parole_1 = "a1", Parole_2 = "a2", Parole_3 = "a3";
+    string Name_1 = "a", Name_2 = "b", Name_3 = "c", Parole_1 = "a1", Parole_2 = "a2", Parole_3 = "a3"; //добавлены в качестве примера
     map <string, string> mapUsers;      //соответствие имени и пароля
     map <string, string>::iterator it;  //в которое будет добавляться соответственно имя и пароль юзера при создании нового объекта User
                                         //и через которе будет проверяться имя и пароль на входе
