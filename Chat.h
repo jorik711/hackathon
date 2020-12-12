@@ -8,8 +8,8 @@
 class Chat
 {
 private:
-    User* _actUser;
-    std::vector<User*> _chatUsers; // вектор с пользователями
+    User _actUser;
+    std::vector<User> _chatUsers; // вектор с пользователями
     std::vector<Message> _message; //вектор с сообщениями 
 
 public:
