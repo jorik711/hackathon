@@ -10,19 +10,19 @@ Message::Message sendMessage(User user, std::string message)
 {
 
 }
-Message::void readMessage(User user)
+void  Message::readMessage()
 {
     
 }
-Message::void setSenduser(User user)
+void  Message::setSenduser(User user)
 {
 
 }
-Message::void setMuser(User user)
+void  Message::setMuser(User user)
 {
 
 }
 Message::~Message()
 {
-    
+
 }

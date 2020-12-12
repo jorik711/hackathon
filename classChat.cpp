@@ -5,19 +5,19 @@ Chat::Chat(std::vector<User> user, std::vector<std::string> message)
 {
 
 }
-Chat::void runChat()
+void Chat::runChat()
 {
 
 }
-Chat::User registration()
+User Chat::registration()
 {
 
 }
-Chat::bool logInFunc(User user)
+bool Chat::logInFunc(User user)
 {
 
 }
-Chat::void showUser()
+void Chat::showUser()
 {
 
 } 

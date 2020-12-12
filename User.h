@@ -7,16 +7,16 @@ using namespace std;
 class User
 {
 public:
-	// Конструктор
-	
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	User();
 	User(string name, string login, string const password);
 
-	// Геттеры
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	string getUserName() const;
 	string getLogin() const;
 	string getPassword() const;
 
-	// Сеттеры
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	void setUserName(char* value);
 	void setLogin(char* value);
 	void setPassword(char* value);
