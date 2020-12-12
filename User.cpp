@@ -1,6 +1,10 @@
 #include "User.h"
 
-//Конструктор
+User::User()
+{
+
+}
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 User::User(string name, string login, string const password)
 {
 	Username = name;
@@ -8,7 +12,7 @@ User::User(string name, string login, string const password)
 	Password = password;
 }
 
-//Геттеры
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 string User::getUserName() const
 {
 	return Username;
@@ -24,7 +28,7 @@ string User::getPassword() const
 	return Password;
 }
 
-//Сеттеры
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void User::setUserName(char* value)
 {
 	Username = value;

@@ -13,11 +13,12 @@ private:
     std::vector<Message> _message; //вектор с сообщениями 
 
 public:
-    Chat(std::vector<User> user, std::vector<std::string> message); // constructor
-    void runChat();//  главное меню с выбором опции (регистраци, вход)
+    Chat();
+    Chat(std::vector<User> user, std::vector<Message> message); // constructor
+    void runChat();//  главное меню с выбором опции (написать сообщение,прочитать сообщение)
     User registration(); // регистрация
-    bool logInFunc(User user); // вход в чат по логину и паролю
-    void showUser(); // показать зарегистрированных пользователей   
+    bool logInFunc(std::vector<User> user); // вход в чат по логину и паролю
+    void showUser(std::vector<User> &alluser); // показать зарегистрированных пользователей   
     ~Chat();
 };
 

@@ -63,7 +63,6 @@ Message Message::sendMessage(User user,std::vector<User> &alluser,std::vector<Me
             if(alluser[c].getUserName() == name || name == "all")
             {
                 mess.setSenduser(name);
-                break;
             }
             else
             {
@@ -73,7 +72,7 @@ Message Message::sendMessage(User user,std::vector<User> &alluser,std::vector<Me
     cout << "Oт кого: "<< user.getUserName() << '\n';
     std:cout << "Введите сообщение: " << '\n';
     std::string newmess;
-    std::getline(std::cin,newmess);
+    std::cin >> newmess;
     mess.setMessage(newmess);
     return mess;
 }
