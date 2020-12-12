@@ -10,7 +10,7 @@ class Message
 private:
     std::string _senduser; // тот кому отправляется сообщение
     std::string _muser; // тот кто отправляет сообщение
-    std::string _message; // сообщение 
+    std::string _message; // отправляемое сообщение 
 public:
     Message();
     Message sendMessage(User user,std::vector<User> &alluser,std::vector<Message> &allmess); // отправить сообщение

@@ -14,7 +14,7 @@ private:
 
 public:
     Chat(std::vector<User> user, std::vector<std::string> message); // constructor
-    void runChat();// главное меню с выбором опции (регистраци, вход)
+    void runChat();//  главное меню с выбором опции (регистраци, вход)
     User registration(); // регистрация
     bool logInFunc(User user); // вход в чат по логину и паролю
     void showUser(); // показать зарегистрированных пользователей   

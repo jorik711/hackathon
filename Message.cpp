@@ -2,7 +2,10 @@
 #include "Message.h"
 #include "User.h"
 
-Message::Message(){}
+Message::Message()
+{
+    
+}
  std::string Message::getSenduser()
  {
      return this->_senduser;
