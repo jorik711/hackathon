@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "classChat.h"
+#include "Chat.h"
 
 
 int main()
