@@ -1,5 +1,5 @@
 #include <iostream>
-#include "classChat.h"
+#include "Chat.h"
 
 Chat::Chat(std::vector<User> user, std::vector<std::string> message)
 {
