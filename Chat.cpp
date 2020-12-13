@@ -65,7 +65,7 @@ void Chat::runChat()
     
     
 }
-void Chat::registration(std::vector<User> alluse)
+void Chat::registration(std::vector<User> alluser)
 {
     std::cout << "+ Введите данные для регистрации!" << '\n';
     std::string name,login,password;
@@ -79,23 +79,22 @@ void Chat::registration(std::vector<User> alluse)
     {
         if (alluser[c].getLogin() == login)
         {
-            cout << "Пользователь с таким логином уже существует" << endl;
+            cout << "+ Пользователь с таким логином уже существует!" << endl;
+            std::cout << std::endl;
             enter = 0;
-            break;
-        }
-        else
-        {
-            enter = 1;
             continue;
         }
     }
     if (enter)
-    std::cout << "Придумайте пароль: ";
-    std::cin >> password;
-    User actuser = User(name,login,password);
-    Chat::setUserList(actuser); // добавление пользователя в массив
-    std::cout << "+ Регистрация успешно завершена!" << '\n';
-    std::cout << std::endl;
+    {
+        std::cout << "Придумайте пароль: ";
+        std::cin >> password;
+        User actuser = User(name,login,password);
+        Chat::setUserList(actuser); // добавление пользователя в массив
+        std::cout << "+ Регистрация успешно завершена!" << '\n';
+        std::cout << std::endl;
+    }
+
     
 }
 bool Chat::logInFunc(std::vector<User> alluser)
