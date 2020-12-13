@@ -30,7 +30,7 @@ int main()
             {
                 if(chat.logInFunc(chat.getUserList())) // вход в чат
                 {
-                    chat.runChat(); // меню чата
+                    chat.runChat(chat); // меню чата
                     continue;
                 }
             }

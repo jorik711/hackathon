@@ -21,7 +21,7 @@ void Chat::setMessageList(Message message)
 {
     this->_message.push_back(message);
 }
-void Chat::runChat()
+void Chat::runChat(Chat chat)
 {
     User user = _actUser;
     Message message;
@@ -30,7 +30,7 @@ void Chat::runChat()
     {
 
         std::cout << "----------------------------------------------------------" << '\n' <<
-        "      Вы вoшли в чат как:" << _actUser.getLogin() << '\n' <<
+        "               Вы вoшли в чат как: " << _actUser.getLogin() << '\n' <<
         "| Выберите номер действия которое хотите выполнить        |" << '\n' <<
         "| 1. Написать сообщение                                   |" << '\n' <<
         "| 2. Прочитать сообщение                                  |" << '\n' <<
@@ -44,17 +44,17 @@ void Chat::runChat()
         switch (startchat)
         {
         case 1:
-            message = message.sendMessage(user,_chatUsers,_message);
-            Chat::setMessageList(message);
+            chat.sendMessage(user,_chatUsers,_message);
             break;
         case 2:
-            message.readMessage(user,_message);
+            chat.readMessage(user,_message);
             break;
         case 3:
             Chat::showUser(_chatUsers);
             break;
         case 4:
             std::cout << "Вы вышли из аккаунта!" << '\n';
+            std::cout << std::endl;
             newchat = false;
             break;
         default:
@@ -89,7 +89,7 @@ bool Chat::logInFunc(std::vector<User> alluser)
     std::cin >> login;
     std::cout << "Введите пароль: ";
     std::cin >> password;
-    bool enter;
+    bool enter = false;
     int size = alluser.size();
     for(int c = 0; c < size; c++)
         {
@@ -101,8 +101,13 @@ bool Chat::logInFunc(std::vector<User> alluser)
             }
     
         }
-        std::cout << "+ Неверный логин или пароль!" << '\n';
-        std::cout << std::endl;
+        if (enter == false)
+        {
+            std::cout << "+ Неверный логин или пароль!" << '\n';
+            std::cout << std::endl;
+        }
+        
+        
     return enter;
 }
 void Chat::showUser(std::vector<User> &alluser)
@@ -113,7 +118,60 @@ void Chat::showUser(std::vector<User> &alluser)
     {
         std::cout << alluser[c].getUserName() << '\n';    
     }
-} 
+}
+void  Chat::readMessage(User user,std::vector<Message> &allmess)
+{
+    int size = allmess.size();
+    for(int c = 0; c < size; c++)
+    {
+        if(allmess[c].getSenduser() == user.getUserName() || allmess[c].getSenduser() == "all" )
+        {
+            cout << "От кого: " << allmess[c].getMuser() << '\n';
+            cout << "Сообщение: " << allmess[c].getMessage() << '\n';
+        }
+        // else
+        // {
+        //     std::cout << "Для Вас нет новых сообщений!" << '\n';
+        // }  
+    }
+    
+}
+void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message> &allmess)
+{
+    Message mess;
+    std::string name;
+    cout << "Кому: ";
+    cin >> name;
+    mess.setMuser(user);
+    int size = alluser.size();
+    for(int c = 0; c < size; c++)
+        {
+            if(alluser[c].getUserName() == name)
+            {
+                mess.setSenduser(name);
+                std::cout << "Oт кого: "<< mess.getMuser() << '\n';
+                cout << "Введите сообщение: ";
+                std::string newmess;
+                std::cin >> newmess;
+                cout << '\n';
+                mess.setMessage(newmess);
+                allmess.push_back(mess);
+
+            }
+       
+        }
+        if (name == "all")
+        {
+            mess.setSenduser("all");
+            std::cout << "Oт кого: "<< mess.getMuser() << '\n';
+            cout << "Введите сообщение: ";
+            std::string newmess;
+            std::cin >> newmess;
+            cout << '\n';
+            mess.setMessage(newmess);
+            allmess.push_back(mess);
+        }
+}
 Chat::~Chat()
 {
 
