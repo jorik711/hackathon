@@ -73,6 +73,23 @@ void Chat::registration(std::vector<User> alluse)
     std::cin >> name;
     std::cout << "Введите логин: ";
     std::cin >> login;
+    bool enter = 1;
+    int size = alluser.size();
+    for (int c = 0; c < size; c++)
+    {
+        if (alluser[c].getLogin() == login)
+        {
+            cout << "Пользователь с таким логином уже существует" << endl;
+            enter = 0;
+            break;
+        }
+        else
+        {
+            enter = 1;
+            continue;
+        }
+    }
+    if (enter)
     std::cout << "Придумайте пароль: ";
     std::cin >> password;
     User actuser = User(name,login,password);
