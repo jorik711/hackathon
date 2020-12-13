@@ -37,6 +37,7 @@ void Chat::runChat(Chat chat)
         "| 2. Прочитать сообщение                                  |" << std::endl <<
         "| 3. Посмотреть зарегистрированных пользователей          |"  << std::endl<<
         "| 4. Выйти из аккаунта                                    |" << std::endl <<
+        "| 5. Добавить пользователя в черный список                 |" << std::endl <<
         "----------------------------------------------------------" << std::endl;
         std::cout << std::endl;
         std::cout << "+ Выберите действие: ";
@@ -57,6 +58,9 @@ void Chat::runChat(Chat chat)
             std::cout << "Вы вышли из аккаунта!" << std::endl;
             std::cout << std::endl;
             newchat = false;
+            break;
+        case 5:
+            _actUser.blockUser(_chatUsers);
             break;
         default:
             std::cout << std::endl << "Такой команды нет!" << std::endl << std::endl;
@@ -160,29 +164,41 @@ void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message>
     cin >> name;
     mess.setMuser(user);
     int size = alluser.size();
-    for(int c = 0; c < size; c++)
-        {
-            if(alluser[c].getUserName() == name)
-            {
-                mess.setSenduser(name);
-                std::cout << "Oт кого: "<< mess.getMuser() << std::endl;
-                
-                std::string newmess;
-                cout << "Введите сообщение: ";
-                std::cin.ignore();
-                getline(std::cin, newmess);
-                cout << std::endl;
-                mess.setMessage(newmess);
-                allmess.push_back(mess);
+    for (int c = 0; c < size; c++)
+    {
 
+        if (alluser[c].getUserName() == name)
+        {
+
+            int sizeofBL = alluser[c].getUserBLsize();
+            for (int j = 0; j < sizeofBL; j++)
+            {
+                if (alluser[c].getUserBlacklist()[j].getUserName() == mess.getMuser())
+                {
+                    cout << "Пользователь добавил вас в черный список :(" << endl;
+                }
+
+                else
+                {
+                    mess.setSenduser(name);
+                    std::cout << "Oт кого: " << mess.getMuser() << '\n';
+                    cout << "Введите сообщение: ";
+                    std::string newmess;
+                    std::cin >> newmess;
+                    cout << '\n';
+                    mess.setMessage(newmess);
+                }
             }
-       
+
+
+
         }
+
         if (name == "all")
         {
             mess.setSenduser("all");
-            std::cout << "Oт кого: "<< mess.getMuser() << std::endl;
-            
+            std::cout << "Oт кого: " << mess.getMuser() << std::endl;
+
             std::string newmess;
             cout << "Введите сообщение: ";
             std::cin.ignore();
@@ -191,6 +207,7 @@ void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message>
             mess.setMessage(newmess);
             allmess.push_back(mess);
         }
+    }
 }
 Chat::~Chat()
 {
