@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Chat.h"
+#include <string>
 
 Chat::Chat()
 {
@@ -29,14 +30,14 @@ void Chat::runChat(Chat chat)
     while (newchat)
     {
 
-        std::cout << "----------------------------------------------------------" << '\n' <<
-        "               Вы вoшли в чат как: " << _actUser.getLogin() << '\n' <<
-        "| Выберите номер действия которое хотите выполнить        |" << '\n' <<
-        "| 1. Написать сообщение                                   |" << '\n' <<
-        "| 2. Прочитать сообщение                                  |" << '\n' <<
-        "| 3. Посмотреть зарегистрированных пользователей          |"  << '\n'<<
-        "| 4. Выйти из аккаунта                                    |" << '\n' <<
-        "----------------------------------------------------------" << '\n';
+        std::cout << "----------------------------------------------------------" << std::endl <<
+        "               Вы вoшли в чат как: " << _actUser.getLogin() << std::endl <<
+        "| Выберите номер действия которое хотите выполнить        |" << std::endl <<
+        "| 1. Написать сообщение                                   |" << std::endl <<
+        "| 2. Прочитать сообщение                                  |" << std::endl <<
+        "| 3. Посмотреть зарегистрированных пользователей          |"  << std::endl<<
+        "| 4. Выйти из аккаунта                                    |" << std::endl <<
+        "----------------------------------------------------------" << std::endl;
         std::cout << std::endl;
         std::cout << "+ Выберите действие: ";
         int startchat = 0;
@@ -53,12 +54,12 @@ void Chat::runChat(Chat chat)
             Chat::showUser(_chatUsers);
             break;
         case 4:
-            std::cout << "Вы вышли из аккаунта!" << '\n';
+            std::cout << "Вы вышли из аккаунта!" << std::endl;
             std::cout << std::endl;
             newchat = false;
             break;
         default:
-            std::cout << '\n' << "Такой команды нет!" << '\n' << '\n';
+            std::cout << std::endl << "Такой команды нет!" << std::endl << std::endl;
             continue;
         }
     }
@@ -67,7 +68,7 @@ void Chat::runChat(Chat chat)
 }
 void Chat::registration(std::vector<User> alluse)
 {
-    std::cout << "+ Введите данные для регистрации!" << '\n';
+    std::cout << "+ Введите данные для регистрации!" << std::endl;
     std::string name,login,password;
     std::cout << "Введите ваше имя: ";
     std::cin >> name;
@@ -77,13 +78,13 @@ void Chat::registration(std::vector<User> alluse)
     std::cin >> password;
     User actuser = User(name,login,password);
     Chat::setUserList(actuser); // добавление пользователя в массив
-    std::cout << "+ Регистрация успешно завершена!" << '\n';
+    std::cout << "+ Регистрация успешно завершена!" << std::endl;
     std::cout << std::endl;
     
 }
 bool Chat::logInFunc(std::vector<User> alluser)
 {   
-    std::cout << "+ Введите данные для входа: " << '\n';
+    std::cout << "+ Введите данные для входа: " << std::endl;
     std::string login,password;
     std::cout << "Введите логин: ";
     std::cin >> login;
@@ -103,7 +104,7 @@ bool Chat::logInFunc(std::vector<User> alluser)
         }
         if (enter == false)
         {
-            std::cout << "+ Неверный логин или пароль!" << '\n';
+            std::cout << "+ Неверный логин или пароль!" << std::endl;
             std::cout << std::endl;
         }
         
@@ -112,11 +113,11 @@ bool Chat::logInFunc(std::vector<User> alluser)
 }
 void Chat::showUser(std::vector<User> &alluser)
 {
-    std::cout << "Список зарегистрированных пользователей: " << '\n';
+    std::cout << "Список зарегистрированных пользователей: " << std::endl;
     int size = alluser.size();
     for(int c = 0; c < size; c++)
     {
-        std::cout << alluser[c].getUserName() << '\n';    
+        std::cout << alluser[c].getUserName() << std::endl;    
     }
 }
 void  Chat::readMessage(User user,std::vector<Message> &allmess)
@@ -126,12 +127,12 @@ void  Chat::readMessage(User user,std::vector<Message> &allmess)
     {
         if(allmess[c].getSenduser() == user.getUserName() || allmess[c].getSenduser() == "all" )
         {
-            cout << "От кого: " << allmess[c].getMuser() << '\n';
-            cout << "Сообщение: " << allmess[c].getMessage() << '\n';
+            cout << "От кого: " << allmess[c].getMuser() << std::endl;
+            cout << "Сообщение: " << allmess[c].getMessage() << std::endl;
         }
         // else
         // {
-        //     std::cout << "Для Вас нет новых сообщений!" << '\n';
+        //     std::cout << "Для Вас нет новых сообщений!" << std::endl;
         // }  
     }
     
@@ -149,11 +150,13 @@ void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message>
             if(alluser[c].getUserName() == name)
             {
                 mess.setSenduser(name);
-                std::cout << "Oт кого: "<< mess.getMuser() << '\n';
-                cout << "Введите сообщение: ";
+                std::cout << "Oт кого: "<< mess.getMuser() << std::endl;
+                
                 std::string newmess;
-                std::cin >> newmess;
-                cout << '\n';
+                cout << "Введите сообщение: ";
+                std::cin.ignore();
+                getline(std::cin, newmess);
+                cout << std::endl;
                 mess.setMessage(newmess);
                 allmess.push_back(mess);
 
@@ -163,11 +166,13 @@ void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message>
         if (name == "all")
         {
             mess.setSenduser("all");
-            std::cout << "Oт кого: "<< mess.getMuser() << '\n';
-            cout << "Введите сообщение: ";
+            std::cout << "Oт кого: "<< mess.getMuser() << std::endl;
+            
             std::string newmess;
-            std::cin >> newmess;
-            cout << '\n';
+            cout << "Введите сообщение: ";
+            std::cin.ignore();
+            getline(std::cin, newmess);
+            cout << std::endl;
             mess.setMessage(newmess);
             allmess.push_back(mess);
         }
