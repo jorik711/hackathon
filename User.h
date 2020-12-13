@@ -20,6 +20,7 @@ public:
 	void setUserName(char* value);
 	void setLogin(char* value);
 	void setPassword(char* value);
+	~User();
 
 private:
 	string Username;

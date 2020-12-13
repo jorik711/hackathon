@@ -43,5 +43,8 @@ void User::setPassword(char* value)
 {
 	Password = value;
 }
-
+User::~User()
+{
+	
+}
 
