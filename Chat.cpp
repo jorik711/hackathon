@@ -5,11 +5,21 @@ Chat::Chat()
 {
 
 }
-
-Chat::Chat(std::vector<User> user, std::vector<Message> message)
+std::vector<User> Chat::getUserList()
 {
-    _chatUsers = user;
-    _message = message;
+    return this->_chatUsers;
+}
+std::vector<Message> Chat::getMessageList()
+{
+    return this->_message;
+}
+void Chat::setUserList(User user)
+{
+    this->_chatUsers.push_back(user);   
+}
+void Chat::setMessageList(Message message)
+{
+    this->_message.push_back(message);
 }
 void Chat::runChat()
 {
@@ -30,7 +40,7 @@ void Chat::runChat()
         {
         case 1:
             message = message.sendMessage(user,_chatUsers,_message);
-            _message.push_back(message);
+            Chat::setMessageList(message);
             break;
         case 2:
             message.readMessage(user,_message);
@@ -43,14 +53,14 @@ void Chat::runChat()
             newchat = false;
             break;
         default:
-            std::cout << "Такой команды нет!" << '\n';
+            std::cout << '\n' << "Такой команды нет!" << '\n' << '\n';
             continue;
         }
     }
     
     
 }
-User Chat::registration()
+void Chat::registration(std::vector<User> alluse)
 {
     std::string name,login,password;
     std::cout << "Введите ваше имя: ";
@@ -60,7 +70,8 @@ User Chat::registration()
     std::cout << "Придумайте пароль: ";
     std::cin >> password;
     User actuser = User(name,login,password);
-    return actuser;
+    Chat::setUserList(actuser); // добавление пользователя в массив
+    
 }
 bool Chat::logInFunc(std::vector<User> alluser)
 {   
@@ -82,6 +93,7 @@ bool Chat::logInFunc(std::vector<User> alluser)
             {
                 std::cout << "Неверный логин или пароль!" << '\n';
                 enter = false;
+                break;
             }
         }
     return enter;

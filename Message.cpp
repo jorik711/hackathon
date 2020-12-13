@@ -63,17 +63,20 @@ Message Message::sendMessage(User user,std::vector<User> &alluser,std::vector<Me
             if(alluser[c].getUserName() == name || name == "all")
             {
                 mess.setSenduser(name);
+                cout << "Oт кого: "<< user.getUserName() << '\n';
+                std:cout << "Введите сообщение: " << '\n';
+                std::string newmess;
+                std::cin >> newmess;
+                mess.setMessage(newmess);
+
             }
             else
             {
-                std::cout << "Такого пользователя не существует" << '\n';
+                std::cout <<'\n' << "Такого пользователя не существует" << '\n'<<'\n';
+                break;
             }
         }
-    cout << "Oт кого: "<< user.getUserName() << '\n';
-    std:cout << "Введите сообщение: " << '\n';
-    std::string newmess;
-    std::cin >> newmess;
-    mess.setMessage(newmess);
+    
     return mess;
 }
 Message::~Message()

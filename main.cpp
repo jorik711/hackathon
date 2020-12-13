@@ -7,9 +7,7 @@
 
 int main()
 {
-    std::vector<User> alluser;
-    std::vector<Message> allmessage;
-    Chat chat = Chat(alluser,allmessage);
+    Chat chat;
     User user;
     bool start = true;
     while (start)
@@ -27,7 +25,7 @@ int main()
         {
         case 1:
             {
-                if(chat.logInFunc(alluser))
+                if(chat.logInFunc(chat.getUserList()))
                 {
                     chat.runChat();
                     continue;
@@ -37,16 +35,15 @@ int main()
         case 2:
             {
                 User user;
-                user = chat.registration(); // регистрация пользователя
-                alluser.push_back(user); // добавление пользователя в массив
+                chat.registration(chat.getUserList()); // регистрация пользователя         
             }
             break;
         case 3:
-            std::cout << "Вы вышли из программы!" << '\n';
+            std::cout << '\n' << "Вы вышли из программы!" << '\n' << '\n';
             start = false;
             break;
         default:
-            std::cout << "Такой комманды нет!" << '\n';
+            std::cout << '\n'<< "Такой комманды нет!" << '\n' << '\n';
             continue;
         }
     }
