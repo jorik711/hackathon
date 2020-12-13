@@ -33,7 +33,7 @@ void Chat::runChat()
         "2. Прочитать сообщение" << '\n' <<
         "3. Посмотреть зарегистрированных пользователей" << '\n'<<
         "4. Выйти из аккаунта" << '\n';
-        std::cout << "Выберите действие: " << '\n';
+        std::cout << "Выберите действие: ";
         int startchat = 0;
         std:cin >> startchat;
         switch (startchat)
@@ -89,12 +89,12 @@ bool Chat::logInFunc(std::vector<User> alluser)
                 this->_actUser = alluser[c];
                 enter = true;
             }
-            else
-            {
-                std::cout << "Неверный логин или пароль!" << '\n';
-                enter = false;
-                break;
-            }
+            // else
+            // {
+            //     std::cout << "Неверный логин или пароль!" << '\n';
+            //     enter = false;
+            //     break;
+            // }
         }
     return enter;
 }
