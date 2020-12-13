@@ -31,8 +31,8 @@ void  Message::readMessage(User user,std::vector<Message> &allmess)
     {
         if(allmess[c].getSenduser() == user.getUserName() || allmess[c].getSenduser() == "all" )
         {
-            cout << "Сообщение от: " << allmess[c].getMuser() << '\n';
-            cout << allmess[c].getMessage() << '\n';
+            cout << "От кого: " << allmess[c].getMuser() << '\n';
+            cout << "Сообщение: " << allmess[c].getMessage() << '\n';
         }
         // else
         // {
@@ -59,7 +59,7 @@ Message Message::sendMessage(User user,std::vector<User> &alluser,std::vector<Me
     int size = alluser.size();
     for(int c = 0; c < size; c++)
         {
-            if(alluser[c].getUserName() == name || name == "all")
+            if(alluser[c].getUserName() == name)
             {
                 mess.setSenduser(name);
                 std::cout << "Oт кого: "<< mess.getMuser() << '\n';
@@ -70,11 +70,17 @@ Message Message::sendMessage(User user,std::vector<User> &alluser,std::vector<Me
                 mess.setMessage(newmess);
 
             }
-            // if()
-            // {
-            //     std::cout <<'\n' << "Такого пользователя не существует" << '\n'<<'\n';
-            //     break;
-            // }
+       
+        }
+        if (name == "all")
+        {
+            mess.setSenduser("all");
+            std::cout << "Oт кого: "<< mess.getMuser() << '\n';
+            cout << "Введите сообщение: ";
+            std::string newmess;
+            std::cin >> newmess;
+            cout << '\n';
+            mess.setMessage(newmess);
         }
     
     return mess;

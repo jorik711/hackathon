@@ -28,12 +28,17 @@ void Chat::runChat()
     bool newchat = true;
     while (newchat)
     {
-        std::cout << "Выберите номер действия которое хотите выполнить" << '\n' <<
-        "1. Написать сообщение" << '\n' <<
-        "2. Прочитать сообщение" << '\n' <<
-        "3. Посмотреть зарегистрированных пользователей" << '\n'<<
-        "4. Выйти из аккаунта" << '\n';
-        std::cout << "Выберите действие: ";
+
+        std::cout << "----------------------------------------------------------" << '\n' <<
+        "      Вы вoшли в чат как:" << _actUser.getLogin() << '\n' <<
+        "| Выберите номер действия которое хотите выполнить        |" << '\n' <<
+        "| 1. Написать сообщение                                   |" << '\n' <<
+        "| 2. Прочитать сообщение                                  |" << '\n' <<
+        "| 3. Посмотреть зарегистрированных пользователей          |"  << '\n'<<
+        "| 4. Выйти из аккаунта                                    |" << '\n' <<
+        "----------------------------------------------------------" << '\n';
+        std::cout << std::endl;
+        std::cout << "+ Выберите действие: ";
         int startchat = 0;
         std:cin >> startchat;
         switch (startchat)
@@ -62,6 +67,7 @@ void Chat::runChat()
 }
 void Chat::registration(std::vector<User> alluse)
 {
+    std::cout << "+ Введите данные для регистрации!" << '\n';
     std::string name,login,password;
     std::cout << "Введите ваше имя: ";
     std::cin >> name;
@@ -71,10 +77,13 @@ void Chat::registration(std::vector<User> alluse)
     std::cin >> password;
     User actuser = User(name,login,password);
     Chat::setUserList(actuser); // добавление пользователя в массив
+    std::cout << "+ Регистрация успешно завершена!" << '\n';
+    std::cout << std::endl;
     
 }
 bool Chat::logInFunc(std::vector<User> alluser)
 {   
+    std::cout << "+ Введите данные для входа: " << '\n';
     std::string login,password;
     std::cout << "Введите логин: ";
     std::cin >> login;
@@ -88,18 +97,17 @@ bool Chat::logInFunc(std::vector<User> alluser)
             {
                 this->_actUser = alluser[c];
                 enter = true;
+                break;
             }
-            // else
-            // {
-            //     std::cout << "Неверный логин или пароль!" << '\n';
-            //     enter = false;
-            //     break;
-            // }
+    
         }
+        std::cout << "+ Неверный логин или пароль!" << '\n';
+        std::cout << std::endl;
     return enter;
 }
 void Chat::showUser(std::vector<User> &alluser)
 {
+    std::cout << "Список зарегистрированных пользователей: " << '\n';
     int size = alluser.size();
     for(int c = 0; c < size; c++)
     {
