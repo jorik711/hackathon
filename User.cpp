@@ -34,16 +34,14 @@ void User::setPassword(char* value) {
 	Password = value;
 }
 
-fstream& operator >>(fstream& is, User& obj)
-{
+fstream& operator >>(fstream& is, User& obj) {
 	is >> obj.Username;
 	is >> obj.Login;
 	is >> obj.Password;
 	return is;
 }
 
-ostream& operator <<(ostream& os, const User& obj)
-{
+ostream& operator <<(ostream& os, const User& obj) {
 	os << obj.Username;
 	os << ' ';
 	os << obj.Login;

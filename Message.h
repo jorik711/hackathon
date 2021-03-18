@@ -19,6 +19,9 @@ public:
     void setMuser(User user); // // Установить имя отправителя
     void setMessage(std::string message); // написать сообщение
     std::string getMessage(); // получить сообщение
+
+    friend fstream& operator >>(fstream& is, Message& obj);
+	friend ostream& operator <<(ostream& os, const Message& obj);
     ~Message();
 };
 

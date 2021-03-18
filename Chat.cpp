@@ -27,14 +27,14 @@ void Chat::runChat(Chat chat)
     while (newchat)
     {
         std::cout << 
-        "----------------------------------------------------------" << std::endl <<
-        "               Вы вoшли в чат как: " << _actUser.getLogin() << std::endl <<
+        "----------------------------------------------------------"  << std::endl <<
+        "               Вы вoшли в чат как: " << _actUser.getLogin()  << std::endl <<
         "| Выберите номер действия которое хотите выполнить        |" << std::endl <<
         "| 1. Написать сообщение                                   |" << std::endl <<
         "| 2. Прочитать сообщение                                  |" << std::endl <<
-        "| 3. Посмотреть зарегистрированных пользователей          |"  << std::endl<<
+        "| 3. Посмотреть зарегистрированных пользователей          |" << std::endl<<
         "| 4. Выйти из аккаунта                                    |" << std::endl <<
-        "----------------------------------------------------------" << std::endl;
+        "----------------------------------------------------------"  << std::endl;
         std::cout << std::endl;
         std::cout << "+ Выберите действие: ";
         int startchat = 0;
@@ -61,10 +61,9 @@ void Chat::runChat(Chat chat)
         }
     }
 }
-void Chat::registration(std::vector<User> &alluser)
-{
+void Chat::registration(std::vector<User> &alluser) {
     std::cout << "+ Введите данные для регистрации!" << std::endl;
-    std::string name,login,password;
+    std::string name, login, password;
     std::cout << "Введите ваше имя: ";
     std::cin >> name;
     std::cout << "Введите логин: ";
@@ -83,14 +82,14 @@ void Chat::registration(std::vector<User> &alluser)
         std::cout << "Придумайте пароль: ";
         std::cin >> password;
         User actuser = User(name,login,password);
+//TODO сюда вставить запись User в файл        
         Chat::setUserList(actuser); // добавление пользователя в массив
         std::cout << "+ Регистрация успешно завершена!" << '\n';
         std::cout << std::endl;
     }
     
 }
-bool Chat::logInFunc(std::vector<User> &alluser)
-{   
+bool Chat::logInFunc(std::vector<User> &alluser) {   
     std::cout << "+ Введите данные для входа: " << std::endl;
     std::string login,password;
     std::cout << "Введите логин: ";
@@ -113,8 +112,7 @@ bool Chat::logInFunc(std::vector<User> &alluser)
         }
     return enter;
 }
-void Chat::showUser(std::vector<User> &alluser)
-{
+void Chat::showUser(std::vector<User> &alluser) {
     std::cout << "Список зарегистрированных пользователей: " << std::endl;
     int size = alluser.size();
     for(int c = 0; c < size; c++) {
@@ -136,8 +134,7 @@ void  Chat::readMessage(User user,std::vector<Message> &allmess)
     }
     
 }
-void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message> &allmess)
-{
+void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message> &allmess) {
     Message mess;
     std::string name;
     cout << "Кому: ";
@@ -155,6 +152,7 @@ void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message>
                 getline(std::cin, newmess);
                 cout << std::endl;
                 mess.setMessage(newmess);
+//TODO запись сообщения в массив vector<Message>                
                 allmess.push_back(mess);
             }
         }
@@ -167,6 +165,7 @@ void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message>
             getline(std::cin, newmess);
             cout << std::endl;
             mess.setMessage(newmess);
+//TODO запись сообщения в массив vector<Message>   
             allmess.push_back(mess);
         }
 }

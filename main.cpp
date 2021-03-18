@@ -8,8 +8,9 @@
 int main()
 {
     Chat chat;
-    User user;
     bool start = true;
+//TODO чтение из файла в массив сообщений vector<Message>
+//TODO чтение из файла в массив пользователей vector<Uessage>
     while (start)
     {
         std::cout << "**************************************************************" << std::endl <<
@@ -36,7 +37,6 @@ int main()
             break;
         case 2:
             {
-                User user;
                 chat.registration(chat.getUserList()); // регистрация пользователя         
             }
             break;
