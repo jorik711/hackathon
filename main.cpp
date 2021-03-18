@@ -28,8 +28,7 @@ int main()
         {
         case 1:
             {
-                if(chat.logInFunc(chat.getUserList())) // вход в чат
-                {
+                if(chat.logInFunc(chat.getUserList())) { // вход в чат
                     chat.runChat(chat); // меню чата
                     continue;
                 }
