@@ -8,8 +8,8 @@
 int main() {
     Chat chat;
     bool start = true;
-//TODO чтение из файла в массив сообщений vector<Message>
-//TODO чтение из файла в массив пользователей vector<Uessage>
+    chat.getUsersFromFile(); //TODO чтение из файла в массив пользователей vector<User>
+    chat.getMessageFromFile(); //TODO чтение из файла в массив сообщений vector<Message>
     while (start) {
         std::cout << "**************************************************************" << std::endl <<
         "*                 Добро пожаловать в чат!                    *"<< std::endl <<
@@ -21,7 +21,7 @@ int main() {
         "**************************************************************" << std::endl;
         std::cout << std::endl << "+ Выберите действие: ";
         int work = 0;
-        std:cin >> work;
+        std::cin >> work;
         std::cout << std::endl;
         switch (work)
         {

@@ -2,7 +2,39 @@
 #include "Chat.h"
 #include <string>
 #include <fstream>
+
 Chat::Chat() {}
+
+void Chat::getUsersFromFile () {
+    fstream user_file = fstream("users.txt", ios::in | ios::out);
+    if (user_file) {
+        User obj;
+        // Чтобы считать данные из файла, надо установить позицию для чтения в начало файла
+		user_file.seekg(0, ios_base::beg);
+        // Считываем данные из файла
+		user_file >> obj;
+        setUserList(obj);
+	}
+	else {
+		cout << "Could not open file users.txt !" << '\n';
+	}
+}   
+
+void Chat::getMessageFromFile () {
+    fstream message_file = fstream("messages.txt", ios::in | ios::out);
+    if (message_file) {
+        Message obj;
+        // Чтобы считать данные из файла, надо установить позицию для чтения в начало файла
+		message_file.seekg(0, ios_base::beg);
+        // Считываем данные из файла
+		message_file >> obj;
+        setMessageList(obj);
+	}
+	else {
+		cout << "Could not open file messages.txt !" << '\n';
+	}
+} 
+
 std::vector<User> Chat::getUserList() {
     return this->_chatUsers;
 }
@@ -33,7 +65,7 @@ void Chat::runChat(Chat chat) {
         std::cout << std::endl;
         std::cout << "+ Выберите действие: ";
         int startchat = 0;
-        std:cin >> startchat;
+        std::cin >> startchat;
         switch (startchat)
         {
         case 1:
@@ -84,6 +116,13 @@ void Chat::registration(std::vector<User> alluser) {
         User actuser = User(name,login,password);
 //TODO сюда вставить запись User в файл        
         Chat::setUserList(actuser); // добавление пользователя в массив
+        if (user_file) {
+            // Запишем данные по в файл
+		    user_file << actuser << endl;
+	    }
+	    else {
+		    cout << "Файл не найден users.txt !" << std::endl;
+	    }
         std::cout << "+ Регистрация успешно завершена!" << '\n';
         std::cout << std::endl;
     }
@@ -157,7 +196,15 @@ void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message>
                 getline(std::cin, newmess);
                 cout << std::endl;
                 mess.setMessage(newmess);
-//TODO запись сообщения в массив vector<Message>                
+                //запись сообщения в файл 
+                if (message_file) {
+                    // Запишем данные по в файл
+		            message_file << mess << endl;
+	            }
+	            else {
+		            std::cout << "Файл не найден users.txt !" << std::endl;
+	            }
+                //запись сообщения в массив vector<Message>                
                 allmess.push_back(mess);
             }
         }
@@ -170,7 +217,15 @@ void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message>
             getline(std::cin, newmess);
             cout << std::endl;
             mess.setMessage(newmess);
-//TODO запись сообщения в массив vector<Message>   
+            //запись сообщения в файл 
+            if (message_file) {
+                // Запишем данные по в файл
+		        message_file << mess << endl;
+	        }
+	        else {
+		        std::cout << "Файл не найден users.txt !" << std::endl;
+	        }
+            //запись сообщения в массив vector<Message>               
             allmess.push_back(mess);
         }
 }

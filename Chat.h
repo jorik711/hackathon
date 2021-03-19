@@ -23,7 +23,9 @@ public:
     void runChat(Chat chat);//  главное меню с выбором опции (написать сообщение,прочитать сообщение)
     void registration(std::vector<User> alluser); // регистрация
     bool logInFunc(std::vector<User> user); // вход в чат по логину и паролю
-    void showUser(std::vector<User> &alluser); // показать зарегистрированных пользователей   
+    void showUser(std::vector<User> &alluser); // показать зарегистрированных пользователей
+    void getUsersFromFile(); // чтение зарегестрированных пользователей из файла 
+    void getMessageFromFile(); // чтение сообщений из файла  
     ~Chat();
 };
 
