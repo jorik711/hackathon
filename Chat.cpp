@@ -1,26 +1,21 @@
 #include <iostream>
 #include "Chat.h"
 #include <string>
-
+#include <fstream>
 Chat::Chat() {}
-std::vector<User> Chat::getUserList()
-{
+std::vector<User> Chat::getUserList() {
     return this->_chatUsers;
 }
-std::vector<Message> Chat::getMessageList()
-{
+std::vector<Message> Chat::getMessageList() {
     return this->_message;
 }
-void Chat::setUserList(User user)
-{
+void Chat::setUserList(User user) {
     this->_chatUsers.push_back(user);   
 }
-void Chat::setMessageList(Message message)
-{
+void Chat::setMessageList(Message message) {
     this->_message.push_back(message);
 }
-void Chat::runChat(Chat chat)
-{
+void Chat::runChat(Chat chat) {
     User user = _actUser;
     Message message;
     bool newchat = true;
@@ -62,6 +57,11 @@ void Chat::runChat(Chat chat)
     }
 }
 void Chat::registration(std::vector<User> alluser) {
+    fstream user_file = fstream("users.txt", ios::in | ios::out);
+	if (!user_file) { 
+		// Для создания файла используем параметр ios::trunc
+           user_file = fstream("users.txt", ios::in | ios::out | ios::trunc);
+    }
     std::cout << "+ Введите данные для регистрации!" << std::endl;
     std::string name, login, password;
     std::cout << "Введите ваше имя: ";
@@ -135,6 +135,11 @@ void  Chat::readMessage(User user,std::vector<Message> &allmess)
     
 }
 void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message> &allmess) {
+    fstream message_file = fstream("messages.txt", ios::in | ios::out);
+	    if (!message_file) { 
+		// Для создания файла используем параметр ios::trunc
+           message_file = fstream("messages.txt", ios::in | ios::out | ios::trunc);
+        }
     Message mess;
     std::string name;
     cout << "Кому: ";
