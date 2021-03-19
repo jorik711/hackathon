@@ -25,14 +25,14 @@ void  Message::setMuser(User user) {
     this->_muser = user.getUserName();
 }
 
-fstream& operator >>(fstream& is, Message& obj) {
+std::fstream& operator >>(std::fstream& is, Message& obj) {
 	is >> obj._senduser;
 	is >> obj._muser;
 	is >> obj._message;
 	return is;
 }
 
-ostream& operator <<(ostream& os, const Message& obj) {
+std::ostream& operator <<(std::ostream& os, const Message& obj) {
 	os << obj._senduser;
 	os << ' ';
 	os << obj._muser;

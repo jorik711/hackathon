@@ -1,24 +1,15 @@
 #include "User.h"
-#include <fstream>
 
 User::User() {}
 
-// User::User(string name, string login, string const password)
-// {
-// 	Username = name;
-// 	Login = login;
-// 	Password = password;
-// }
-
-string User::getUserName() const {
+std::string User::getUserName() const {
 	return Username;
 }
 
-string User::getLogin() const {
+std::string User::getLogin() const {
 	return Login;
 }
-
-string User::getPassword() const {
+std::string User::getPassword() const {
 	return Password;
 }
 
@@ -34,14 +25,14 @@ void User::setPassword(char* value) {
 	Password = value;
 }
 
-fstream& operator >>(fstream& is, User& obj) {
+std::fstream& operator >>(std::fstream& is, User& obj) {
 	is >> obj.Username;
 	is >> obj.Login;
 	is >> obj.Password;
 	return is;
 }
 
-ostream& operator <<(ostream& os, const User& obj) {
+std::ostream& operator <<(std::ostream& os, const User& obj) {
 	os << obj.Username;
 	os << ' ';
 	os << obj.Login;

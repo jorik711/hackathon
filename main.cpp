@@ -1,15 +1,10 @@
-#include <iostream>
-#include <string>
 #include "Chat.h"
-#include <vector>
-#include "Message.h"
-
 
 int main() {
     Chat chat;
     bool start = true;
-    chat.getUsersFromFile(); //TODO чтение из файла в массив пользователей vector<User>
-    chat.getMessageFromFile(); //TODO чтение из файла в массив сообщений vector<Message>
+    chat.getUsersFromFile(); // чтение из файла в массив пользователей vector<User>
+    chat.getMessageFromFile(); // чтение из файла в массив сообщений vector<Message>
     while (start) {
         std::cout << "**************************************************************" << std::endl <<
         "*                 Добро пожаловать в чат!                    *"<< std::endl <<

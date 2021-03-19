@@ -1,8 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-
-using namespace std;
+#include <fstream>
 
 class User
 {
@@ -10,14 +9,14 @@ public:
 	
 	User();
 	//User(string name, string login, string const password);
-	User(string name, string login, string pass):Username(name), Login(login), Password(pass) {}
+	User(std::string name, std::string login, std::string pass): Username(name), Login(login), Password(pass) {}
 	
-	friend fstream& operator >>(fstream& is, User& obj);
-	friend ostream& operator <<(ostream& os, const User& obj);
+	friend std::fstream& operator >>(std::fstream& is, User& obj);
+	friend std::ostream& operator <<(std::ostream& os, const User& obj);
 
-	string getUserName() const;
-	string getLogin() const;
-	string getPassword() const;
+	std::string getUserName() const;
+	std::string getLogin() const;
+	std::string getPassword() const;
 
 	
 	void setUserName(char* value);
@@ -26,9 +25,9 @@ public:
 	~User();
 
 private:
-	string Username;
-	string Login;
-	string Password;
+	std::string Username;
+	std::string Login;
+	std::string Password;
 
 };
 

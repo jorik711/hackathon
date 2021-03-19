@@ -1,7 +1,6 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
-#include <string>
 #include "User.h"
 #include <vector>
 
@@ -20,8 +19,8 @@ public:
     void setMessage(std::string message); // написать сообщение
     std::string getMessage(); // получить сообщение
 
-    friend fstream& operator >>(fstream& is, Message& obj);
-	friend ostream& operator <<(ostream& os, const Message& obj);
+    friend std::fstream& operator >>(std::fstream& is, Message& obj);
+	friend std::ostream& operator <<(std::ostream& os, const Message& obj);
     ~Message();
 };
 

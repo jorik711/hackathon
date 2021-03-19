@@ -1,9 +1,7 @@
 #ifndef CHAT_H
 #define CHAT_H
 
-#include <vector>
 #include "Message.h"
-#include "User.h"
 
 class Chat
 {

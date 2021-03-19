@@ -1,37 +1,35 @@
-#include <iostream>
 #include "Chat.h"
-#include <string>
-#include <fstream>
 
 Chat::Chat() {}
 
 void Chat::getUsersFromFile () {
-    fstream user_file = fstream("users.txt", ios::in | ios::out);
+    std::fstream user_file = std::fstream("users.txt", std::ios::in | std::ios::out);
+    User obj;
+    // Чтобы считать данные из файла, надо установить позицию для чтения в начало файла
+	user_file.seekg(0, std::ios_base::beg);
     if (user_file) {
-        User obj;
-        // Чтобы считать данные из файла, надо установить позицию для чтения в начало файла
-		user_file.seekg(0, ios_base::beg);
-        // Считываем данные из файла
+        while (!user_file.eof()) {
 		user_file >> obj;
-        setUserList(obj);
+        setUserList(obj);                
+        }
 	}
 	else {
-		cout << "Could not open file users.txt !" << '\n';
+		std::cout << "Could not open file users.txt !" << '\n';
 	}
 }   
 
 void Chat::getMessageFromFile () {
-    fstream message_file = fstream("messages.txt", ios::in | ios::out);
+    std::fstream message_file = std::fstream("messages.txt", std::ios::in | std::ios::out);
     if (message_file) {
         Message obj;
         // Чтобы считать данные из файла, надо установить позицию для чтения в начало файла
-		message_file.seekg(0, ios_base::beg);
+		message_file.seekg(0, std::ios_base::beg);
         // Считываем данные из файла
 		message_file >> obj;
         setMessageList(obj);
 	}
 	else {
-		cout << "Could not open file messages.txt !" << '\n';
+		std::cout << "Could not open file messages.txt !" << '\n';
 	}
 } 
 
@@ -89,10 +87,10 @@ void Chat::runChat(Chat chat) {
     }
 }
 void Chat::registration(std::vector<User> alluser) {
-    fstream user_file = fstream("users.txt", ios::in | ios::out);
+    std::fstream user_file = std::fstream("users.txt", std::ios::app | std::ios::in | std::ios::out );
 	if (!user_file) { 
 		// Для создания файла используем параметр ios::trunc
-           user_file = fstream("users.txt", ios::in | ios::out | ios::trunc);
+           user_file = std::fstream("users.txt", std::ios::in | std::ios::out | std::ios::trunc);
     }
     std::cout << "+ Введите данные для регистрации!" << std::endl;
     std::string name, login, password;
@@ -104,7 +102,7 @@ void Chat::registration(std::vector<User> alluser) {
     int size = alluser.size();
     for (int c = 0; c < size; c++) {
         if (alluser[c].getLogin() == login) {
-            cout << "+ Пользователь с таким логином уже существует!" << endl;
+            std::cout << "+ Пользователь с таким логином уже существует!" << std::endl;
             std::cout << std::endl;
             enter = 0;
             continue;
@@ -113,15 +111,15 @@ void Chat::registration(std::vector<User> alluser) {
     if (enter) {
         std::cout << "Придумайте пароль: ";
         std::cin >> password;
-        User actuser = User(name,login,password);
-//TODO сюда вставить запись User в файл        
+        User actuser = User(name,login,password);      
         Chat::setUserList(actuser); // добавление пользователя в массив
+        // запись User в файл  
         if (user_file) {
             // Запишем данные по в файл
-		    user_file << actuser << endl;
+		    user_file << actuser << std::endl;
 	    }
 	    else {
-		    cout << "Файл не найден users.txt !" << std::endl;
+		    std::cout << "Файл не найден users.txt !" << std::endl;
 	    }
         std::cout << "+ Регистрация успешно завершена!" << '\n';
         std::cout << std::endl;
@@ -158,13 +156,13 @@ void Chat::showUser(std::vector<User> &alluser) {
         std::cout << alluser[c].getUserName() << std::endl;    
     }
 }
-void  Chat::readMessage(User user,std::vector<Message> &allmess)
+void Chat::readMessage(User user,std::vector<Message> &allmess)
 {
     int size = allmess.size();
     for(int c = 0; c < size; c++) {
         if(allmess[c].getSenduser() == user.getUserName() || allmess[c].getSenduser() == "all" ) {
-            cout << "От кого: " << allmess[c].getMuser() << std::endl;
-            cout << "Сообщение: " << allmess[c].getMessage() << std::endl;
+            std::cout << "От кого: " << allmess[c].getMuser() << std::endl;
+            std::cout << "Сообщение: " << allmess[c].getMessage() << std::endl;
         }
         // else
         // {
@@ -174,15 +172,15 @@ void  Chat::readMessage(User user,std::vector<Message> &allmess)
     
 }
 void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message> &allmess) {
-    fstream message_file = fstream("messages.txt", ios::in | ios::out);
+    std::fstream message_file = std::fstream("messages.txt", std::ios::app | std::ios::in | std::ios::out);
 	    if (!message_file) { 
 		// Для создания файла используем параметр ios::trunc
-           message_file = fstream("messages.txt", ios::in | ios::out | ios::trunc);
+           message_file = std::fstream("messages.txt", std::ios::in | std::ios::out | std::ios::trunc);
         }
     Message mess;
     std::string name;
-    cout << "Кому: ";
-    cin >> name;
+    std::cout << "Кому: ";
+    std::cin >> name;
     mess.setMuser(user);
     int size = alluser.size();
     for(int c = 0; c < size; c++) {
@@ -191,15 +189,15 @@ void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message>
                 std::cout << "Oт кого: "<< mess.getMuser() << std::endl;
                 
                 std::string newmess;
-                cout << "Введите сообщение: ";
+                std::cout << "Введите сообщение: ";
                 std::cin.ignore();
                 getline(std::cin, newmess);
-                cout << std::endl;
+                std::cout << std::endl;
                 mess.setMessage(newmess);
                 //запись сообщения в файл 
                 if (message_file) {
                     // Запишем данные по в файл
-		            message_file << mess << endl;
+		            message_file << mess << std::endl;
 	            }
 	            else {
 		            std::cout << "Файл не найден users.txt !" << std::endl;
@@ -212,15 +210,15 @@ void Chat::sendMessage(User user,std::vector<User> &alluser,std::vector<Message>
             mess.setSenduser("all");
             std::cout << "Oт кого: "<< mess.getMuser() << std::endl;
             std::string newmess;
-            cout << "Введите сообщение: ";
+            std::cout << "Введите сообщение: ";
             std::cin.ignore();
             getline(std::cin, newmess);
-            cout << std::endl;
+            std::cout << std::endl;
             mess.setMessage(newmess);
             //запись сообщения в файл 
             if (message_file) {
                 // Запишем данные по в файл
-		        message_file << mess << endl;
+		        message_file << mess << std::endl;
 	        }
 	        else {
 		        std::cout << "Файл не найден users.txt !" << std::endl;
