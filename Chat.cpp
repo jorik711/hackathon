@@ -61,7 +61,7 @@ void Chat::runChat(Chat chat)
         }
     }
 }
-void Chat::registration(std::vector<User> &alluser) {
+void Chat::registration(std::vector<User> alluser) {
     std::cout << "+ Введите данные для регистрации!" << std::endl;
     std::string name, login, password;
     std::cout << "Введите ваше имя: ";
@@ -89,7 +89,7 @@ void Chat::registration(std::vector<User> &alluser) {
     }
     
 }
-bool Chat::logInFunc(std::vector<User> &alluser) {   
+bool Chat::logInFunc(std::vector<User> alluser) {   
     std::cout << "+ Введите данные для входа: " << std::endl;
     std::string login,password;
     std::cout << "Введите логин: ";

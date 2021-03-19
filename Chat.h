@@ -21,8 +21,8 @@ public:
     void setUserList(User user);
     void setMessageList(Message message);
     void runChat(Chat chat);//  главное меню с выбором опции (написать сообщение,прочитать сообщение)
-    void registration(std::vector<User> &alluser); // регистрация
-    bool logInFunc(std::vector<User> &user); // вход в чат по логину и паролю
+    void registration(std::vector<User> alluser); // регистрация
+    bool logInFunc(std::vector<User> user); // вход в чат по логину и паролю
     void showUser(std::vector<User> &alluser); // показать зарегистрированных пользователей   
     ~Chat();
 };

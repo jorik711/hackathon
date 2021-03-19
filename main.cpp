@@ -5,14 +5,12 @@
 #include "Message.h"
 
 
-int main()
-{
+int main() {
     Chat chat;
     bool start = true;
 //TODO чтение из файла в массив сообщений vector<Message>
 //TODO чтение из файла в массив пользователей vector<Uessage>
-    while (start)
-    {
+    while (start) {
         std::cout << "**************************************************************" << std::endl <<
         "*                 Добро пожаловать в чат!                    *"<< std::endl <<
         "* Зарегистрируйтесь или войдите,усли у вас уже есть аккаунт! *" << std::endl <<
