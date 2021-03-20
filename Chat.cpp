@@ -5,12 +5,16 @@ Chat::Chat() {}
 void Chat::getUsersFromFile () {
     std::fstream user_file = std::fstream("users.txt", std::ios::in | std::ios::out);
     User obj;
+    if (!user_file) {
+		// Для создания файла используем параметр ios::trunc
+        user_file = std::fstream("users.txt", std::ios::in | std::ios::out | std::ios::trunc);
+    }
     // Чтобы считать данные из файла, надо установить позицию для чтения в начало файла
 	user_file.seekg(0, std::ios_base::beg);
     if (user_file) {
         while (!user_file.eof()) {
-		user_file >> obj;
-        setUserList(obj);                
+		    user_file >> obj;
+            setUserList(obj);                
         }
 	}
 	else {
@@ -20,13 +24,19 @@ void Chat::getUsersFromFile () {
 
 void Chat::getMessageFromFile () {
     std::fstream message_file = std::fstream("messages.txt", std::ios::in | std::ios::out);
+    Message obj;
+    // Чтобы считать данные из файла, надо установить позицию для чтения в начало файла
+	message_file.seekg(0, std::ios_base::beg);
+    if (!message_file) {
+		// Для создания файла используем параметр ios::trunc
+        message_file = std::fstream("messages.txt", std::ios::in | std::ios::out | std::ios::trunc);
+    }
     if (message_file) {
-        Message obj;
-        // Чтобы считать данные из файла, надо установить позицию для чтения в начало файла
-		message_file.seekg(0, std::ios_base::beg);
-        // Считываем данные из файла
-		message_file >> obj;
-        setMessageList(obj);
+        while (!message_file.eof()) {
+            // Считываем данные из файла
+		    message_file >> obj;
+            setMessageList(obj);
+        }
 	}
 	else {
 		std::cout << "Could not open file messages.txt !" << '\n';
